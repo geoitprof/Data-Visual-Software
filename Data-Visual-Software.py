@@ -40,3 +40,21 @@ class DataVisualizationSoftware(tk.Tk):
 
             generate_button = tk.Button(chart_frame, text = "Generate Chart", command = self.generate_chart)
             generate_button.grid(row = len(chart_type) + 1, column = 0, padx = 5, pady = 5)
+
+        def add_data(self):
+            data_type = self.data_type_entry.get()
+            value = self.value_entry.get()
+
+            if data_type and value:
+                try:
+                    value = float(value)
+                    self.data.append((data_type, value))
+                    messagebox.showinfo("Success", "Data added succesfully!")
+                except ValueError:
+                    messagebox.showerror("Error", "Invalid Value! Pleaser enter a numeric value.")
+            else:          
+                messagebox.showerror("Error", "Please enter data type and value.")
+
+                self.data_type_entry.delete(0, tk.END)
+                self.value_entry.delete(0, tk.END) 
+                
