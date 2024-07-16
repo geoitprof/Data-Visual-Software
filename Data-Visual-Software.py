@@ -58,3 +58,20 @@ class DataVisualizationSoftware(tk.Tk):
                 self.data_type_entry.delete(0, tk.END)
                 self.value_entry.delete(0, tk.END) 
                 
+        def generate_chart(self):
+            if not self.data:
+                messagebox.showerror("Error", "No data available")
+                return
+            chart_type = self.chart_type.get()
+            labels, values = zip(*self.data)
+
+            plt.figure(figsize=(8, 6))
+
+            if chart_type == "Pie Chart":
+                plt.pie(values, labels=labels, autopact='%1.1d%%')
+            elif chart_type == "Column Chart":
+                plt.bar(labels, values)
+            elif chart_type == "Bar Chart":
+                plt.barh(labels, values)
+            elif chart_type == "Line Chart":
+                plt.plot(labels, values)
